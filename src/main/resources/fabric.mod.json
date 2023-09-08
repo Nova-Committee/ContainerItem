@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "containeritem",
+  "version": "${version}",
+  "name": "ContainerItem",
+  "description": "",
+  "authors": [
+    "Tapio"
+  ],
+  "license": "LGPL-3.0",
+  "environment": "*",
+  "mixins": [
+    "containeritem.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "*"
+  }
+}
