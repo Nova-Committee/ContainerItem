@@ -2,7 +2,6 @@ package committee.nova.containeritem.mixin;
 
 import committee.nova.containeritem.api.IHasContainerItem;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.collection.DefaultedList;
@@ -18,9 +17,8 @@ public abstract class MixinRecipe<T extends Inventory> {
         final DefaultedList<ItemStack> list = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
         for (int i = 0; i < list.size(); i++) {
             final ItemStack stack = inventory.getStack(i);
-            final Item item = stack.getItem();
-            if (!item.hasRecipeRemainder() || !(item instanceof IHasContainerItem r)) continue;
-            list.set(i, r.getContainerItem(stack));
+            final IHasContainerItem item = (IHasContainerItem) stack.getItem();
+            if (item.hasContainerItem(stack)) list.set(i, item.getContainerItem(stack));
         }
         cir.setReturnValue(list);
     }
